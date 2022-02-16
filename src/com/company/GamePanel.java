@@ -27,6 +27,7 @@ public class GamePanel extends JPanel implements ActionListener {
     boolean running = false;
     Timer timer;
     Random random;
+    JButton resetButton;
 
 
     GamePanel(){
@@ -147,6 +148,21 @@ public class GamePanel extends JPanel implements ActionListener {
         FontMetrics metrics2 = getFontMetrics(g.getFont());
         g.drawString("Game Over", (SCREEN_WIDTH - metrics2.stringWidth("Game Over"))/2, SCREEN_HEIGHT/2);
     }
+    public void resetButtonBox(){
+
+        resetButton = new JButton();
+        resetButton.setText("Reset");
+        resetButton.setSize(100, 50);
+        resetButton.setLocation(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+        resetButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
+
+        this.add(resetButton);
+        this.setVisible(true);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -156,6 +172,9 @@ public class GamePanel extends JPanel implements ActionListener {
             checkCollisions();
         }
         repaint();
+        if(!running){
+            resetButtonBox();
+        }
     }
 
     public class MyKeyAdapter extends KeyAdapter{
